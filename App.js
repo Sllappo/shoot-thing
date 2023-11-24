@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Sub from './pages/subscribe'
+import Home from './pages/home'
 
 export default function App() {
   return (
-    <Sub/>
+    <Home/>
   );
 }
 
