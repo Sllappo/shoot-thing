@@ -14,6 +14,10 @@ export default function Home({navigation}){
                 title = "users page"
                 onPress={() => navigation.replace('Users')}
             />
+            <Button
+                title='Page Inscription'
+                onPress={() => navigation.replace('Sub')}
+            />
         </View>
     );
 }

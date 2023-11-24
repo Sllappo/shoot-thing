@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, Image, TextInput, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import {LinearGradient} from 'expo-linear-gradient';
+import { NavigationContainer } from '@react-navigation/native';
 
 const hidePassword =true 
 
-export default function Sub() {
+export default function Sub({navigation}) {
     return (
         <View style={styles.container}>
             <LinearGradient colors={['#9A76BD', '#316BDC']} style={styles.gradient}>
@@ -43,7 +44,7 @@ export default function Sub() {
             secureTextEntry={hidePassword}
             placeholderTextColor="#FFF"
             />
-            <Pressable style={styles.submit}>
+            <Pressable style={styles.submit} onPress={() => navigation.replace('Home')}>
             <Text style={styles.button}>INSCRIPTION</Text>
             </Pressable>
             <Text style={styles.text}>
