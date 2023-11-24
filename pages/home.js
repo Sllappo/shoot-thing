@@ -3,10 +3,26 @@ import Users from './users';
 import { StyleSheet, Text, View, Button} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { NavigationContainer } from '@react-navigation/native';
+import Video from 'react-native-video';
+
+const onBuffer = (data) => {
+    console.log("on bufferring==>>>", data)
+}
+  
+const videoError = (data) => {
+    console.log("error raised===>>>", data)
+}
 
 export default function Home({navigation}){
     return(
         <View style={styles.container}>
+            <Video source={require("../assets/accueil-video.mp4")}
+            repeat={true}
+            onBuffer={onBuffer}
+            onError={videoError}
+            resizeMode='cover'
+            style={styles.backgroundVideo} 
+            />
             <Text style={styles.text}>
                Shoot Thing
             </Text>
@@ -34,4 +50,11 @@ const styles = StyleSheet.create({
         color: "#592E83",
         fontWeight: '900',
     },
+    backgroundVideo: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+      },
   });
