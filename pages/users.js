@@ -10,7 +10,7 @@ export default function Users({navigation}){
     return(
         <LinearGradient colors={['#9A76BD', '#316BDC']} style = {{height: '100%'}}>
             <View style = {styles.body}>
-                <View style={{backgroundColor:"white", width:"100%",alignItems:"center",height:155,marginTop:"20%", borderRadius:"20%",}}>
+                <View style={{backgroundColor:"white", width:"100%",alignItems:"center",height:155,marginTop:"20%", borderRadius:"20%",justifyContent:"center",}}>
                     <Image
                         source={require("../assets/photo_profil.png")}
                         style = {styles.img_profil}
@@ -18,7 +18,7 @@ export default function Users({navigation}){
                 </View>
                 <Text style = {styles.pseudo}>Melissa peters</Text>
                 <View style = {styles.description_profil}>
-                    <Text>Bonjour je suis Mag je possède actuellement un salon de coiffure sur Nantes et j'aime la musique, la nourriture et les avions de chasse</Text>
+                    <Text style={{color:"white",}}>Bonjour je suis Mag je possède actuellement un salon de coiffure sur Nantes et j'aime la musique, la nourriture et les avions de chasse</Text>
                 </View>
                 <Text style = {styles.img_position}>
                 <Image
@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
         height:'100%',
     },
     img_profil:{
-        height:155,
-        width:155,
+        height:100,
+        width:100,
     },
     pseudo:{
         marginTop:"5%",
@@ -112,13 +112,7 @@ const styles = StyleSheet.create({
     },
     description_profil:{
         marginTop:"2%",
-        color:"black",
-        backgroundColor:"#38A95E",
         width:"70%",
-        borderWidth: 1,
-        overflow:"hidden",
-        borderRadius:"10%",
-        paddingLeft:"2%",
     },
     img_position:{
         marginTop:"3%",
@@ -147,7 +141,7 @@ const styles = StyleSheet.create({
         position:"absolute",
         justifyContent:"space-evenly",
         width:"100%",
-        backgroundColor:"#FF8C42",
+        backgroundColor:"#FFFFFF",
         height:"10%",
         alignItems: 'center',
     },
