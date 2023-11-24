@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Users from './users';
-import { StyleSheet, Text, View, Button} from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { NavigationContainer } from '@react-navigation/native';
 import Video from 'react-native-video';
@@ -23,17 +23,19 @@ export default function Home({navigation}){
             resizeMode='cover'
             style={styles.backgroundVideo} 
             />
+            <View style = {{justifyContent:"center",height:"70%", width:245,}}>
             <Text style={styles.text}>
                Shoot Thing
             </Text>
-            <Button
-                title = "users page"
-                onPress={() => navigation.replace('Users')}
-            />
-            <Button
-                title='Page Inscription'
-                onPress={() => navigation.replace('Sub')}
-            />
+            <View style={styles.containerhome}>
+                <Pressable style={styles.submit} onPress={() => navigation.replace('Users')}>
+                <Text style={styles.button}>CONNEXION</Text>
+                </Pressable>
+                <Pressable style={styles.submit2} onPress={() => navigation.replace('Sub')}>
+                <Text style={styles.button}>INSCRIPTION</Text>
+                </Pressable>
+            </View>
+            </View>
         </View>
     );
 }
@@ -45,10 +47,18 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    containerhome: {
+        
+        bottom:0,
+        position:"absolute",
+    },
     text: {
         fontSize: 32,
-        color: "#592E83",
+        justifyContent: 'center',
+        textAlign: 'center',
+        color: "#7D2AE7",
         fontWeight: '900',
+     
     },
     backgroundVideo: {
         position: 'absolute',
@@ -57,4 +67,33 @@ const styles = StyleSheet.create({
         bottom: 0,
         right: 0,
       },
+      submit:{
+        width:245,
+        height:63,
+        flexShrink:0,
+        borderRadius:36,
+        borderWidth:4,
+        borderColor:"#FFF",
+        backgroundColor:"#A05BE34D",
+        justifyContent:"center",
+        marginTop:20,
+    },
+    submit2:{
+        width:245,
+        height:63,
+        flexShrink:0,
+        borderRadius:36,
+        borderWidth:4,
+        borderColor:"#FFF",
+        backgroundColor:"#C9B9D93D",
+        justifyContent:"center",
+        marginTop:20,
+
+    },
+    button:{
+        color:"#FFF",
+        textAlign:"center",
+        fontSize:20,
+        fontWeight:"800",
+    },
   });
