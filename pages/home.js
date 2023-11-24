@@ -1,14 +1,19 @@
-import React from 'react';
-import { StyleSheet, Text, View,} from 'react-native';
+import React, { useState } from 'react';
+import Users from './users';
+import { StyleSheet, Text, View, Button} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { NavigationContainer } from '@react-navigation/native';
 
-
-export default function Home(){
+export default function Home({navigation}){
     return(
         <View style={styles.container}>
             <Text style={styles.text}>
                Shoot Thing
             </Text>
+            <Button
+                title = "users page"
+                onPress={() => navigation.replace('Users')}
+            />
         </View>
     );
 }
@@ -21,8 +26,8 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     text: {
-        fontSize: "32",
+        fontSize:32,
         color: "#592E83",
-        fontWeight: "900",
+        fontWeight: 900,
     },
   });
