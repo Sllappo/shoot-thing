@@ -10,7 +10,7 @@ export default function Users({navigation}){
     return(
         <LinearGradient colors={['#9A76BD', '#316BDC']} style = {{height: '100%'}}>
             <View style = {styles.body}>
-                <View style={{backgroundColor:"white", width:"100%",alignItems:"center",height:155,marginTop:"20%", borderRadius:"20%",justifyContent:"center",}}>
+                <View style={{backgroundColor:"white", width:"100%",alignItems:"center",height:155,marginTop:"20%", borderRadius:30,justifyContent:"center"}}>
                     <Image
                         source={require("../assets/photo_profil.png")}
                         style = {styles.img_profil}
@@ -72,7 +72,7 @@ export default function Users({navigation}){
                             style = {styles.footer_nav}
                         />
                     </Pressable>
-                    <Pressable onPress={() => navigation.replace('Home')}>
+                    <Pressable onPress={() => navigation.replace('Profiledit')}>
                         <Image
                             source={require("../assets/logo_podium.png")}
                             style = {styles.footer_nav}
