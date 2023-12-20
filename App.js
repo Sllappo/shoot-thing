@@ -13,11 +13,11 @@ export default function App() {
     // <Home/>
 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Profiledit">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
-        {/* <Stack.Screen name="Users" options={{headerShown:false}} component={Users}/> */}
-        {/* <Stack.Screen name="Sub" options={{headerShown:false}} component={Sub}/> */}
-        {/* <Stack.Screen name="Profiledit" options={{headerShown:false}} component={profiledit}/> */}
+        {<Stack.Screen name="Users" options={{ headerShown: false }} component={Users} />}
+        {<Stack.Screen name="Sub" options={{ headerShown: false }} component={Sub} />}
+        {<Stack.Screen name="Profiledit" options={{ headerShown: false }} component={profiledit} />}
       </Stack.Navigator>
     </NavigationContainer>
   );
