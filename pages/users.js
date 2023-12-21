@@ -66,7 +66,7 @@ export default function Users({ navigation }) {
                 </View>
                 {/* Footeur */}
                 <View style={styles.footer}>
-                    <Pressable onPress={() => navigation.replace('Home')}>
+                    <Pressable onPress={() => navigation.replace('Publi')}>
                         <Image
                             source={require("../assets/accueil_logo.png")}
                             style={styles.footer_nav}
@@ -127,11 +127,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginTop: "5%",
         backgroundColor: "#FFD166",
-        borderRadius: "10%",
+        borderRadius: 10,
     },
     Button_navigation_profile: {
         marginTop: "6%",
-        borderBottomWidth: "3",
+        borderBottomWidth: 3,
         width: "45%",
         justifyContent: "space-between",
     },

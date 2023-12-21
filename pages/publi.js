@@ -38,7 +38,7 @@ export default function Publi({navigation}){
                 </View>
             </ScrollView>
             <View style = {styles.footer}>
-                        <Pressable onPress={() => navigation.replace('Home')}>
+                        <Pressable onPress={() => navigation.replace('Publi')}>
                             <Image
                                 source={require("../assets/accueil_logo.png")}
                                 style = {styles.footer_nav}
