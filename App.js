@@ -7,6 +7,7 @@ import Sub from './pages/subscribe';
 import profiledit from './pages/profiledit';
 import { NavigationContainer } from '@react-navigation/native';
 import Settings from './pages/settings';
+import Publi from './pages/publi';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         {<Stack.Screen name="Sub" options={{ headerShown: false }} component={Sub} />}
         {<Stack.Screen name="Profiledit" options={{ headerShown: false }} component={profiledit} />}
         {<Stack.Screen name="Settings" options={{ headerShown: false }} component={Settings} />}
+        {<Stack.Screen name="Publi" options={{ headerShown: false }} component={Publi} />}
       </Stack.Navigator>
     </NavigationContainer>
   );
