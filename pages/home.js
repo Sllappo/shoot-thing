@@ -17,7 +17,7 @@ export default function Home({ navigation }) {
                 />
             </View>
             <View style={{ ...StyleSheet.absoluteFillObject, alignItems: 'center', marginTop: "70%", fontWeight: 'bold', fontSize: 18, }}>
-                <Text style={{ color: "#7D2AE7", fontSize: "40%", fontWeight: "bold" }}>Shoot Thing</Text>
+                <Text style={{ color: "#7D2AE7", fontSize: 40, fontWeight: "bold" }}>Shoot Thing</Text>
             </View>
             <View style={styles.pressablecontainer}>
                 <Pressable onPress={() => navigation.push('Users')} style={styles.bouton1}>
@@ -33,6 +33,7 @@ export default function Home({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
+        margin: 0,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundVideo: {
         flex: 1,
         height: 100,
-        width: 400,
+        width: 500,
     },
     bouton1: {
         marginTop: 30,
