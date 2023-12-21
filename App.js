@@ -8,6 +8,7 @@ import profiledit from './pages/profiledit';
 import { NavigationContainer } from '@react-navigation/native';
 import camera from './pages/camera';
 import Settings from './pages/settings';
+import Publi from './pages/publi';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
         {<Stack.Screen name="Profiledit" options={{ headerShown: false }} component={profiledit} />}
         {<Stack.Screen name="Settings" options={{ headerShown: false }} component={Settings} />}
         <Stack.Screen name="Camera" options={{headerShown:false}} component={camera}/>
+        {<Stack.Screen name="Publi" options={{ headerShown: false }} component={Publi} />}
       </Stack.Navigator>
     </NavigationContainer>
   );
