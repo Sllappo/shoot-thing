@@ -1,6 +1,8 @@
 import React from "react";
-import { StyleSheet, View, Text, Image, Button, Pressable, Alert } from "react-native";
+import { StyleSheet, View, Text, Image, Button, Pressable } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
+import { NavigationContainer } from '@react-navigation/native';
+
 export default function Users({ navigation }) {
     const text_stats_num_top = { color: "white", fontSize: 20, width: "25%", textAlign: "center", marginTop: "5%" }
     const text_stats_num = { color: "white", fontSize: 20, width: "25%", textAlign: "center", }
