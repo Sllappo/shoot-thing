@@ -13,9 +13,9 @@ export default function Profiledit({ navigation }) {
     const [currentValue, setCurrentValue] = useState();
 
     const pays = [
-        { label: "Fr", value: "France" },
-        { label: "Eng", value: "English" },
-        { label: "Belg", value: "Belgique" }
+        { label: "France", value: "France" },
+        { label: "English", value: "English" },
+        { label: "Belgium", value: "Belgique" }
     ]
 
     const hidePassword = true
@@ -25,10 +25,12 @@ export default function Profiledit({ navigation }) {
             <LinearGradient colors={['#9A76BD', '#316BDC']} style={styles.gradient}>
                 <View style={{ backgroundColor: "none", width: "100%" }}>
                     <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                        <Image
-                            source={require("../assets/fleche_arriere.png")}
-                            style={{ height: 30, width: 30 }}
-                        />
+                        <Pressable onPress={() => navigation.push('Home')}>
+                            <Image
+                                source={require("../assets/fleche_arriere.png")}
+                                style={{ height: 30, width: 30 }}
+                            />
+                        </Pressable>
                         <Text style={{ fontSize: 30, color: "white" }}>Editer son profil</Text>
                         <View style={{ height: 30, width: 30 }} />
                     </View>
@@ -37,44 +39,38 @@ export default function Profiledit({ navigation }) {
                         style={styles.img_profil}
                     />
                 </View>
-                <View>
+                <View style={{ width: "90%" }}>
                     <Text style={styles.categorie}>Nom</Text>
-                    {/* <TextInput i react-native-dropdown-picker
-                style={styles.input}
-                placeholder="ex: Charles"
-                placeholderTextColor="black"
-                backgroundColor="white"
-                /> */}
                     <CustomTextInput
                         placeholder={"test"}
                         customStyle={{
-                            color: "red"
+                            backgroundColor: "white",
                         }}
                     />
                     <Text style={styles.categorie}>Email</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="@gmail.com"
-                        placeholderTextColor="black"
-                        backgroundColor="white"
+                    <CustomTextInput
+                        placeholder={"@gmail.com"}
+                        customStyle={{
+                            backgroundColor: "white",
+                        }}
                     />
                     <Text style={styles.categorie}>Mot de Passe</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Mot de passe"
-                        placeholderTextColor="black"
-                        secureTextEntry={hidePassword}
-                        backgroundColor="white"
+                    <CustomTextInput
+                        placeholder={"mot de passe"}
+                        hidePassword={true}
+                        customStyle={{
+                            backgroundColor: "white",
+                        }}
                     />
                     <Text style={styles.categorie}>Description</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="okdozjdoind incontestable de jiafei, vive la kpop et les mochis "
-                        placeholderTextColor="black"
-                        backgroundColor="white"
+                    <CustomTextInput
+                        placeholder={"Description"}
+                        customStyle={{
+                            backgroundColor: "white",
+                        }}
                     />
                     <Text style={styles.categorie}>Pays</Text>
-                    <DropDownPicker style={{ marginLeft: "5%", marginTop: "3%", width: "89%" }}
+                    <DropDownPicker style={{ marginLeft: "5%", marginTop: "3%", width: "90%" }}
                         items={pays}
                         open={isOpen}
                         setOpen={() => setIsOpen(!isOpen)}
@@ -86,10 +82,9 @@ export default function Profiledit({ navigation }) {
                     />
                     <View style={{ alignItems: "center" }}>
                         <Pressable onPress={() => navigation.push('Home')} style={styles.buttonsave}>
-                            <Text style={{ textAlign: "center", fontSize: 20 }}>Pays</Text>
+                            <Text style={{ textAlign: "center", fontSize: 20 }}>Save Changes</Text>
                         </Pressable>
                     </View>
-
                 </View>
             </LinearGradient>
         </View>

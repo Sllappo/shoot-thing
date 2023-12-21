@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
+import { NavigationContainer } from '@react-navigation/native';
 
 const CustomTextInput = ({ placeholder, hidePassword = false, customStyle }) => {
 
@@ -9,14 +10,13 @@ const CustomTextInput = ({ placeholder, hidePassword = false, customStyle }) => 
       placeholder={placeholder}
       placeholderTextColor="black"
       secureTextEntry={hidePassword}
-    // backgroundColor="white"
     />
   );
 }
 
 const styles = StyleSheet.create({
   input: {
-    height: 35,
+    height: 40,
     margin: 20,
     borderWidth: 1,
     padding: 10,
