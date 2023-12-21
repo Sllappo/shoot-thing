@@ -12,6 +12,7 @@ import UploadImages from './pages/uploadImage';
 import 'expo-dev-client';
 import camera from './pages/camera';
 import Settings from './pages/settings';
+import Publi from './pages/publi';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
