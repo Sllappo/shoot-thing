@@ -10,6 +10,7 @@ import Publi from './pages/publi';
 import Login from './pages/loginpage';
 import UploadImages from './pages/uploadImage';
 import 'expo-dev-client';
+import camera from './pages/camera';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
           {<Stack.Screen name="Publi" options={{ headerShown: false }} component={Publi} />}
           {<Stack.Screen name="Login" options={{ headerShown: false }} component={Login} />}
           {<Stack.Screen name="UploadImages" options={{ headerShown: false }} component={UploadImages} />}
+          <Stack.Screen name="Camera" options={{headerShown:false}} component={camera}/>
         </Stack.Navigator>
       </NavigationContainer>
   );
