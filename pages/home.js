@@ -20,7 +20,7 @@ export default function Home({ navigation }) {
                 <Text style={{ color: "#7D2AE7", fontSize: 40, fontWeight: "bold" }}>Shoot Thing</Text>
             </View>
             <View style={styles.pressablecontainer}>
-                <Pressable onPress={() => navigation.push('Users')} style={styles.bouton1}>
+                <Pressable onPress={() => navigation.push('Login')} style={styles.bouton1}>
                     <Text style={{ textAlign: "center", fontSize: 20, color: "white", }}>Connexion</Text>
                 </Pressable>
                 <Pressable onPress={() => navigation.push('Sub')} style={styles.bouton2}>
