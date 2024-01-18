@@ -1,11 +1,34 @@
-import { StyleSheet, Text, View, Image, TextInput, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, TextInput, Pressable,Alert } from 'react-native';
+import React, { useEffect,useState } from 'react';
 import {LinearGradient} from 'expo-linear-gradient';
 import { NavigationContainer } from '@react-navigation/native';
+import { useAuth } from "../providers/AuthProvider";
+
 
 const hidePassword =true 
 
 export default function Sub({navigation}) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const { user, signUp, signIn } = useAuth();
+    const onPressSignUp = async () => {
+        console.log("Trying Sign Up with user: " + email);
+        try {
+          await signUp(email, password);
+          signIn(email, password);
+          navigation.navigate("Publi");
+        } catch (error) {
+          const errorMessage = `Failed to sign up: ${error.message}`;
+          console.error(errorMessage);
+          Alert.alert(errorMessage);
+        }
+      };
+      useEffect(() => {
+        // If there is a user logged in, go to the Projects page.
+        if (user != null) {
+          navigation.navigate("Publi");
+        }
+      }, [user]);
     return (
         <View style={styles.container}>
             <LinearGradient colors={['#9A76BD', '#316BDC']} style={styles.gradient}>
@@ -28,13 +51,18 @@ export default function Sub({navigation}) {
             placeholderTextColor="#FFF"
             />
             <TextInput
-            style={styles.input}         
+            style={styles.input} 
+            onChangeText={setEmail}        
             placeholder="Email"
+            value={email}
             placeholderTextColor="#FFF"
+            autoCapitalize="none"
             />
             <TextInput
             style={styles.input}
-            placeholder="Password"
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            placeholder="password"
             placeholderTextColor="#FFF"
             secureTextEntry={hidePassword}
             />
@@ -44,7 +72,7 @@ export default function Sub({navigation}) {
             secureTextEntry={hidePassword}
             placeholderTextColor="#FFF"
             />
-            <Pressable style={styles.submit} onPress={() => navigation.replace('Home')}>
+            <Pressable style={styles.submit} onPress={onPressSignUp}>
             <Text style={styles.button}>INSCRIPTION</Text>
             </Pressable>
             <Text style={styles.text}>
