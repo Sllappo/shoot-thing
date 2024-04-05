@@ -1,12 +1,14 @@
 import React from "react";
-import { StyleSheet, View, Text, Image, Button, Pressable } from "react-native";
+import { StyleSheet, View, Text, Image, Button, Pressable, Alert } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
+import { useAuth } from "../providers/AuthProvider";
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function Users({ navigation }) {
     const text_stats_num_top = { color: "white", fontSize: 20, width: "25%", textAlign: "center", marginTop: "5%" }
     const text_stats_num = { color: "white", fontSize: 20, width: "25%", textAlign: "center", }
     const button_de_profil = { backgroundColor: "#FFD166", width: "30%", textAlign: "center", backgroundColor: "red", }
+    const { signOut } = useAuth();
     return (
         <LinearGradient colors={['#9A76BD', '#316BDC']} style={{ height: '100%' }}>
             <View style={styles.body}>

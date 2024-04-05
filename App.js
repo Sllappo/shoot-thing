@@ -15,6 +15,7 @@ import Settings from './pages/settings';
 import Publi from './pages/publi';
 import Login from './pages/loginpage';
 import 'expo-dev-client';
+import { AuthProvider } from './providers/AuthProvider';
 const Stack = createNativeStackNavigator()
 
 export default function App() {

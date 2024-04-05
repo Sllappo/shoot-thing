@@ -1,41 +1,11 @@
-import { StyleSheet, Text, View, Image, TextInput, Pressable, Alert } from 'react-native';
-import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, Image, TextInput, Pressable } from 'react-native';
+import React, { useState } from 'react';
 import {LinearGradient} from 'expo-linear-gradient';
-import { supabase } from '../supabase.js';
-import { AppState } from 'react-native'
-import { Session } from '@supabase/supabase-js'
-
-AppState.addEventListener('change', (state) => {
-    if (state === 'active') {
-      supabase.auth.startAutoRefresh()
-    } else {
-      supabase.auth.stopAutoRefresh()
-    }
-  })
+import { NavigationContainer } from '@react-navigation/native';
 
 const hidePassword =true 
 
-
-export default function Sub({navigation} ) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
-
-    async function signUpWithEmail() {
-        setLoading(true)
-        const {
-          data: { session },
-          error,
-        } = await supabase.auth.signUp({
-          email: email,
-          password: password,
-        })
-    
-        if (error) Alert.alert(error.message)
-        if (!session) Alert.alert('Please check your inbox for email verification!')
-        setLoading(false)
-      }
-    
+export default function Sub({navigation}) {
     return (
         <View style={styles.container}>
             <LinearGradient colors={['#9A76BD', '#316BDC']} style={styles.gradient}>
@@ -79,7 +49,7 @@ export default function Sub({navigation} ) {
             secureTextEntry={hidePassword}
             placeholderTextColor="#FFF"
             />
-            <Pressable style={styles.submit} disabled={loading} onPress={() => signUpWithEmail()}>
+            <Pressable style={styles.submit} onPress={() => navigation.replace('Home')}>
             <Text style={styles.button}>INSCRIPTION</Text>
             </Pressable>
             <Text style={styles.text}>
