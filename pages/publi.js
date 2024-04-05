@@ -50,7 +50,7 @@ export default function Publi({navigation}){
                                 style = {styles.footer_nav}
                             />
                         </Pressable>
-                        <Pressable onPress={() => navigation.replace('Home')}>
+                        <Pressable onPress={() => navigation.replace('UploadImages')}>
                             <Image
                                 source={require("../assets/choix.png")}
                                 style = {styles.footer_nav}

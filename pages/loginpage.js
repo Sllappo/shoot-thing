@@ -1,33 +1,37 @@
 import { StyleSheet, Text, View, Image, TextInput, Pressable, Alert } from 'react-native';
 import React, { useEffect, useState } from "react";
 import {LinearGradient} from 'expo-linear-gradient';
-import { useAuth } from "../providers/AuthProvider";
-import { NavigationContainer } from '@react-navigation/native';
+import { supabase } from '../supabase.js';
+import { AppState } from 'react-native'
+import { Session } from '@supabase/supabase-js'
+
+AppState.addEventListener('change', (state) => {
+    if (state === 'active') {
+      supabase.auth.startAutoRefresh()
+    } else {
+      supabase.auth.stopAutoRefresh()
+    }
+  })
 
 const hidePassword =true 
 
 export default function Login({navigation}) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const { user, signUp, signIn } = useAuth();
-    useEffect(() => {
-        // If there is a user logged in, go to the Projects page.
-        if (user != null) {
-          navigation.navigate("Publi");
-        }
-      }, [user]);
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
 
-      const onPressSignIn = async () => {
-        console.log("Trying sign in with user: " + email);
-        try {
-          await signIn(email, password);
-        } catch (error) {
-          const errorMessage = `Failed to sign in: ${error.message}`;
-          console.error(errorMessage);
-          Alert.alert(errorMessage);
-        }
-      };
+    async function signInWithEmail() {
+        setLoading(true)
+        const { error } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password,
+        })
     
+        if (error) Alert.alert(error.message)
+        else navigation.push('Publi')
+        setLoading(false)
+      }
+
     return (
         <View style={styles.container}>
             <LinearGradient colors={['#9A76BD', '#316BDC']} style={styles.gradient}>
@@ -54,13 +58,13 @@ export default function Login({navigation}) {
             />
             <TextInput
             style={styles.input}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={setPassword}
             value={password}
             placeholder="password"
             placeholderTextColor="#FFF"
             secureTextEntry={hidePassword}
             />
-            <Pressable style={styles.submit} onPress={onPressSignIn}>
+            <Pressable style={styles.submit} disabled={loading} onPress={() => signInWithEmail()}>
             <Text style={styles.button}>Connexion</Text>
             </Pressable>
             <Text style={styles.text}>
