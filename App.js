@@ -10,20 +10,14 @@ import Publi from './pages/publi';
 import Login from './pages/loginpage';
 import UploadImages from './pages/uploadImage';
 import 'expo-dev-client';
-import camera from './pages/camera';
-import Settings from './pages/settings';
-import Publi from './pages/publi';
-import Login from './pages/loginpage';
-import UploadImages from './pages/uploadImage';
-import 'expo-dev-client';
-import camera from './pages/camera';
+import Camera from './pages/camera';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
     // <Home/>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Camera">
           <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
           {<Stack.Screen name="Users" options={{ headerShown: false }} component={Users} />}
           {<Stack.Screen name="Sub" options={{ headerShown: false }} component={Sub} />}
@@ -32,7 +26,7 @@ export default function App() {
           {<Stack.Screen name="Publi" options={{ headerShown: false }} component={Publi} />}
           {<Stack.Screen name="Login" options={{ headerShown: false }} component={Login} />}
           {<Stack.Screen name="UploadImages" options={{ headerShown: false }} component={UploadImages} />}
-          {<Stack.Screen name="Camera" options={{headerShown:false}} component={camera}/>}
+          {<Stack.Screen name="Camera" options={{headerShown:false}} component={Camera}/>}
         </Stack.Navigator>
       </NavigationContainer>
   );

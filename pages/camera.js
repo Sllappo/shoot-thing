@@ -1,86 +1,43 @@
-import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, Dimension, View, Text, TouchableOpacity, SafeAreaView, Image } from "react-native";
-import { Camera, CameraType, } from "expo-camera";
-import { Video } from "expo-av";
-import * as MediaLibrary from "expo-media-library";
-import Button from './src/components/Button';
-import { StatusBar } from "expo-status-bar";
+import Users from './users';
+import { useState } from 'react';
+import { StyleSheet, Text, View, Button, Pressable } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { NavigationContainer } from '@react-navigation/native';
+import { supabase } from '../supabase.js';
 
-export default function camera({ navigation }) {
-    const [hasCameraPermission, setHasCameraPermission] = useState(null);
+
+
+export default function Camera() {
     const [image, setImage] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.back);
-    const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
-    const cameraRef = useRef(null);
-
-    useEffect(() => {
-        (async () => {
-            MediaLibrary.requestPermissionsAsync();
-            const cameraStatus = await Camera.requestCameraPermissionsAsync();
-            setHasCameraPermission(cameraStatus.status === 'granted');
-        })();
-    }, [])
-
-    const takePicture = async () => {
-        if (cameraRef) {
-            try {
-                const data = await cameraRef.current.takePictureAsync();
-                console.log(data);
-                setImage(data.uri);
-            } catch (e) {
-                console.log(e);
-            }
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes:
+                ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+        if (!result.cancelled) {
+            setImage(result.uri)
         }
-    }
+    };
 
-    if (hasCameraPermission === false) {
-        return <Text>Pas d'accès à la caméra</Text>
-    }
+    const uploadImage = async () => {
+        const file = await fetch(image);
+        const blob = await file.blob();
+        const { data, error } = await supabase.storage.from('images').upload((`image-${Date.now()}`, blob));
 
-    return (
-        <View style={styles.container}>
-            {!image ?
-                <Camera
-                    style={styles.camera}
-                    type={type}
-                    flashMode={flash}
-                    ref={cameraRef}
-                >
-
-                </Camera>
-                :
-                <Image source={{ uri: image }} style={styles.camera} />
-            }
-            <View>
-                {image ?
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent:'space-between',
-                        paddingHorizontal : 50, 
-                    }}>
-                        <Button title={''} icon="retweet" onPress={() => setImage(null)}/>
-                        <Button title={''} icon="check"/>
-                    </View>
-                    :
-                    <Button title={''} icon="circle" onPress={takePicture} />
-                }
-            </View>
-        </View>
-    );
+        if (error) {
+            Alert.alert('Error', 'Failed to upload image');
+        }
+        else {
+            Alert.alert('Success Image uploaded successfully');
+            //Enregistrer l'URL de l'image dans la base de donnée
+        }
+    };
+    return(<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> 
+    {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />} 
+    <Button title="Choisir une image" onPress={pickImage} /> 
+    <Button title="Uploader l'image" onPress={uploadImage} /> 
+    </View>)
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'black',
-        justifyContent: 'center',
-        paddingBottom: 20
-    },
-    camera: {
-        flex: 1,
-        borderRadius: 20,
-
-    },
-}
-)
-
