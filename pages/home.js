@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Users from './users';
 import { StyleSheet, Text, View, Button, Pressable, fontweight } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { Video, resizeMode } from 'expo-av';
 
 export default function Home({ navigation }) {

@@ -9,14 +9,13 @@ import camera from './pages/camera';
 import Settings from './pages/settings';
 import Publi from './pages/publi';
 import Login from './pages/loginpage';
+import UploadImages from './pages/uploadImage';
 import 'expo-dev-client';
-import { AuthProvider } from './providers/AuthProvider';
 const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
     // <Home/>
-    <AuthProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
@@ -26,9 +25,9 @@ export default function App() {
           {<Stack.Screen name="Settings" options={{ headerShown: false }} component={Settings} />}
           {<Stack.Screen name="Publi" options={{ headerShown: false }} component={Publi} />}
           {<Stack.Screen name="Login" options={{ headerShown: false }} component={Login} />}
+          {<Stack.Screen name="UploadImages" options={{ headerShown: false }} component={UploadImages} />}
         </Stack.Navigator>
       </NavigationContainer>
-    </AuthProvider>
   );
 }
 

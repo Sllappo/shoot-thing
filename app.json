@@ -26,7 +26,8 @@
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.shootthing.shootthing"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -43,6 +44,7 @@
       "eas": {
         "projectId": "f641a655-1f9b-4d53-9666-67a494463bc8"
       }
-    }
+    },
+    "owner": "shoot-thing"
   }
 }

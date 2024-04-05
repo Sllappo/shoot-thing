@@ -1,34 +1,41 @@
-import { StyleSheet, Text, View, Image, TextInput, Pressable,Alert } from 'react-native';
-import React, { useEffect,useState } from 'react';
+import { StyleSheet, Text, View, Image, TextInput, Pressable, Alert } from 'react-native';
+import React, { useEffect, useState } from "react";
 import {LinearGradient} from 'expo-linear-gradient';
-import { NavigationContainer } from '@react-navigation/native';
-import { useAuth } from "../providers/AuthProvider";
+import { supabase } from '../supabase.js';
+import { AppState } from 'react-native'
+import { Session } from '@supabase/supabase-js'
 
+AppState.addEventListener('change', (state) => {
+    if (state === 'active') {
+      supabase.auth.startAutoRefresh()
+    } else {
+      supabase.auth.stopAutoRefresh()
+    }
+  })
 
 const hidePassword =true 
 
-export default function Sub({navigation}) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const { user, signUp, signIn } = useAuth();
-    const onPressSignUp = async () => {
-        console.log("Trying Sign Up with user: " + email);
-        try {
-          await signUp(email, password);
-          signIn(email, password);
-          navigation.navigate("Publi");
-        } catch (error) {
-          const errorMessage = `Failed to sign up: ${error.message}`;
-          console.error(errorMessage);
-          Alert.alert(errorMessage);
-        }
-      };
-      useEffect(() => {
-        // If there is a user logged in, go to the Projects page.
-        if (user != null) {
-          navigation.navigate("Publi");
-        }
-      }, [user]);
+
+export default function Sub({navigation} ) {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    async function signUpWithEmail() {
+        setLoading(true)
+        const {
+          data: { session },
+          error,
+        } = await supabase.auth.signUp({
+          email: email,
+          password: password,
+        })
+    
+        if (error) Alert.alert(error.message)
+        if (!session) Alert.alert('Please check your inbox for email verification!')
+        setLoading(false)
+      }
+    
     return (
         <View style={styles.container}>
             <LinearGradient colors={['#9A76BD', '#316BDC']} style={styles.gradient}>
@@ -72,7 +79,7 @@ export default function Sub({navigation}) {
             secureTextEntry={hidePassword}
             placeholderTextColor="#FFF"
             />
-            <Pressable style={styles.submit} onPress={onPressSignUp}>
+            <Pressable style={styles.submit} disabled={loading} onPress={() => signUpWithEmail()}>
             <Text style={styles.button}>INSCRIPTION</Text>
             </Pressable>
             <Text style={styles.text}>
