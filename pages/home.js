@@ -1,68 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button, Pressable, fontweight } from 'react-native';
-import { Video, resizeMode } from 'expo-av';
+import Users from './users';
+import { StyleSheet, Text, View, Button, Pressable } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function Home({ navigation }) {
-    return (
-        <View style={styles.container}>
-            <View>
-                <Video
-                    source={require("../assets/accueil-video.mp4")}
-                    style={styles.backgroundVideo}
-                    resizeMode='cover'
-                    shouldPlay
-                    isLooping
-                />
-            </View>
-            <View style={{ ...StyleSheet.absoluteFillObject, alignItems: 'center', marginTop: "70%", fontWeight: 'bold', fontSize: 18, }}>
-                <Text style={{ color: "#7D2AE7", fontSize: 40, fontWeight: "bold" }}>Shoot Thing</Text>
-            </View>
-            <View style={styles.pressablecontainer}>
-                <Pressable onPress={() => navigation.push('Login')} style={styles.bouton1}>
-                    <Text style={{ textAlign: "center", fontSize: 20, color: "white", }}>Connexion</Text>
-                </Pressable>
-                <Pressable onPress={() => navigation.push('Sub')} style={styles.bouton2}>
-                    <Text style={{ textAlign: "center", fontSize: 20, color: "white", }}>S'inscrire</Text>
-                </Pressable>
-            </View>
-        </View>
-    );
+import { supabase } from 'supabase.js';
+
+const supabaseUrl = 'https://isdrblvcgfkosdxpmetw.supabase.co/';
+const supabaseKey ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlzZHJibHZjZ2Zrb3NkeHBtZXR3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIxMzQ0NTMsImV4cCI6MjAyNzcxMDQ1M30.zmJEXSatrtQMb_7Gmnh5SuxDO_z2uKYvM7pMLHMlcug';
+
+
+
+
+export default function ImageUploadScreen() {
+    const [image, setImage] = useState(null);
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes:
+                ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+        if (!result.cancelled) {
+            setImage(result.uri)
+        }
+    };
+
+    const uploadImage = async () => {
+        const file = await fetch(image);
+        const blob = await file.blob();
+        const { data, error } = await supabase.storage.from('images').upload((`image-${Date.now()}`, blob));
+
+        if (error) {
+            Alert.alert('Error', 'Failed to upload image');
+        }
+        else {
+            Alert.alert('Success Image uploaded successfully');
+            //Enregistrer l'URL de l'image dans la base de donnée
+        }
+    };
+    (<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> 
+    {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />} 
+    <Button title="Choisir une image" onPress={pickImage} /> 
+    <Button title="Uploader l'image" onPress={uploadImage} /> 
+    </View>)
 }
 
-const styles = StyleSheet.create({
-    container: {
-        margin: 0,
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    pressablecontainer: {
-        ...StyleSheet.absoluteFillObject,
-        justifyContent: 'center',
-        alignItems: 'center'
 
-    },
-    backgroundVideo: {
-        flex: 1,
-        height: 100,
-        width: 500,
-    },
-    bouton1: {
-        marginTop: 30,
-        backgroundColor: 'rgba(160,91,227,0.5)',
-        width: "50%",
-        borderRadius: 20,
-        borderWidth: 2, borderColor: "white",
-        height: "5%",
-        justifyContent: 'center'
-    },
-    bouton2: {
-        marginTop: 30,
-        backgroundColor: 'rgba(201,185,217,0.5)',
-        width: "50%",
-        borderRadius: 20,
-        borderWidth: 2, borderColor: "white",
-        height: "5%",
-        justifyContent: 'center'
-    }
-});
+
