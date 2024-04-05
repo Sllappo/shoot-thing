@@ -27,7 +27,7 @@
     "firebase": "^10.10.0",
     "mogodb": "^0.0.1-security",
     "react": "18.2.0",
-    "react-native": "0.72.5",
+    "react-native": "0.72.6",
     "react-native-calendar-picker": "^7.1.4",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-dropdown-select-list": "^2.0.5",

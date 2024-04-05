@@ -9,17 +9,25 @@ const hidePassword =true
 export default function Login({navigation}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const onPressSignUp = async () => {
-        console.log("Trying Sign Up with user: " + email);
+    const { user, signUp, signIn } = useAuth();
+    useEffect(() => {
+        // If there is a user logged in, go to the Projects page.
+        if (user != null) {
+          navigation.navigate("Publi");
+        }
+      }, [user]);
+
+      const onPressSignIn = async () => {
+        console.log("Trying sign in with user: " + email);
         try {
-          await signUp(email, password);
-          signIn(email, password);
+          await signIn(email, password);
         } catch (error) {
-          const errorMessage = `Failed to sign up: ${error.message}`;
+          const errorMessage = `Failed to sign in: ${error.message}`;
           console.error(errorMessage);
           Alert.alert(errorMessage);
         }
       };
+    
     return (
         <View style={styles.container}>
             <LinearGradient colors={['#9A76BD', '#316BDC']} style={styles.gradient}>
@@ -38,12 +46,17 @@ export default function Login({navigation}) {
             </View>
             <TextInput
             style={styles.input}
-            placeholder="Pseudo"
+            onChangeText={setEmail}
+            placeholder="Email"
+            value={email}
             placeholderTextColor="#FFF"
+            autoCapitalize="none"
             />
             <TextInput
             style={styles.input}
-            placeholder="Password"
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            placeholder="password"
             placeholderTextColor="#FFF"
             secureTextEntry={hidePassword}
             />
