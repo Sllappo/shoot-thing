@@ -86,10 +86,9 @@ export default function Profiledit({ navigation }) {
                     />
                     <View style={{ alignItems: "center" }}>
                         <Pressable onPress={() => navigation.push('Home')} style={styles.buttonsave}>
-                            <Text style={{ textAlign: "center", fontSize: 20 }}>Pays</Text>
+                            <Text style={{ textAlign: "center", fontSize: 20 }}>Save Changes</Text>
                         </Pressable>
                     </View>
-
                 </View>
             </LinearGradient>
         </View>
